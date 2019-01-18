@@ -1,0 +1,15 @@
+@import '../../constants/styles.scss';
+
+#{$root} {
+    .zoom-bar {
+        align-items: center;
+        justify-content: space-around;
+
+        &__button {
+            &--active {
+                background-color: $white;
+                color: $secondary;
+            }
+        }
+    }
+}
