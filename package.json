@@ -6,6 +6,7 @@
     "bootstrap": "^4.2.1",
     "classnames": "^2.2.6",
     "dhtmlx-gantt": "^6.0.4",
+    "dhtmlx-scheduler": "^5.1.6",
     "node-sass": "^4.11.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",

@@ -3054,6 +3054,11 @@ dhtmlx-gantt@^6.0.4:
   resolved "https://registry.yarnpkg.com/dhtmlx-gantt/-/dhtmlx-gantt-6.0.4.tgz#59ceac6917bd20ac5e8703ee2c09dcc4c1dcd97b"
   integrity sha512-9u3Zh8UVhpP0l7R5QiI/ORmk2+Pa+pG3XEGRXaxPFiBq5cY+n5X/z9+Tt1OeRtOFvOOedR4+UaVmaXivWVtIIQ==
 
+dhtmlx-scheduler@^5.1.6:
+  version "5.1.6"
+  resolved "https://registry.yarnpkg.com/dhtmlx-scheduler/-/dhtmlx-scheduler-5.1.6.tgz#3e21677a8dd1eba264bbaaeaf280e0cd817f8607"
+  integrity sha512-19XTx2r9eV6Caz1qWA6p6xo+BhUzXcfU51W7eQ6rFMJJjCmxfCF0aUnuFxrtduS4v+tA8z6w5zyIkFj6+LCKCQ==
+
 diff@^3.2.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/diff/-/diff-3.5.0.tgz#800c0dd1e0a8bfbc95835c202ad220fe317e5a12"

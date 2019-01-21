@@ -6,6 +6,7 @@ import Gantt from '../../components/Gantt';
 // Components
 import Toolbar from '../../components/Toolbar';
 import MessageArea from '../../components/MessageArea';
+import Scheduler from '../../components/Scheduler';
 // Styles
 import './styles.scss';
 
@@ -17,7 +18,12 @@ const data = {
   ],
   links: [
     { id: 1, source: 1, target: 2, type: '0' }
-  ]
+  ],
+  events: [
+    { id: 1, text: 'Meeting', start_date: '01/20/2019 14:00', end_date: '01/20/2019 17:00' },
+    { id: 2, text: 'Conference', start_date: '01/21/2019 12:00', end_date: '04/21/2019 19:00' },
+    { id: 3, text: 'Interview', start_date: '01/19/2019 09:00' ,end_date: '01/19/2019 10:00' }
+  ],
 };
 
 class App extends React.Component {
@@ -26,10 +32,13 @@ class App extends React.Component {
     currentPriority: null,
     messages: [],
     searchValue: '',
+    currentDHTMLX: 'scheduler'
   };
 
   render() {
-    const { currentZoom, messages, searchValue, currentPriority } = this.state;
+    const { currentZoom, messages, searchValue, currentPriority, currentDHTMLX } = this.state;
+    const isGantt = currentDHTMLX === 'gantt';
+    const isScheduler = currentDHTMLX === 'scheduler';
     return (
       <Container>
         <Row>
@@ -42,19 +51,29 @@ class App extends React.Component {
                   onZoomChange={this.handleZoomChange}
                   onPriorityChange={this.handlePriorityChange}
                   onSetSearchString={this.setSerchString}
+                  toggleDHTMLXHandler={this.toggleDHTMLXHandler}
+                  isCurrentDHTMLXGantt={isGantt}
+                  isCurrentDHTMLXScheduler={isScheduler}
                 />
               </CardHeader>
               <CardBody>
-                <div className="gantt-container">
-                  <Gantt
-                    tasks={data}
-                    zoom={currentZoom}
-                    onTaskUpdated={this.logTaskUpdate}
-                    onLinkUpdated={this.logLinkUpdate}
-                    search={searchValue}
-                    priority={currentPriority}
-                  />
-                </div>
+                {isGantt && (
+                  <div className="gantt-container">
+                    <Gantt
+                      tasks={data}
+                      zoom={currentZoom}
+                      onTaskUpdated={this.logTaskUpdate}
+                      onLinkUpdated={this.logLinkUpdate}
+                      search={searchValue}
+                      priority={currentPriority}
+                    />
+                  </div>
+                )}
+                {isScheduler && (
+                  <div className="scheduler-container">
+                    <Scheduler tasks={data} />
+                  </div>
+                )}
               </CardBody>
               <CardFooter>
                 <MessageArea messages={messages} />
@@ -110,6 +129,12 @@ class App extends React.Component {
     }
 
     this.addMessage(message);
+  }
+
+  toggleDHTMLXHandler = () => {
+    this.setState((prevProps) => ({
+      currentDHTMLX: prevProps.currentDHTMLX === 'gantt' ? 'scheduler' : 'gantt',
+    }));
   }
 }
 

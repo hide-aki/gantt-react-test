@@ -7,25 +7,34 @@ import './styles.scss';
 
 class Toolbar extends React.Component {
   render() {
-    const { zoom, priority } = this.props;
+    const { zoom, priority, isCurrentDHTMLXGantt, isCurrentDHTMLXScheduler } = this.props;
+
     return (
       <ButtonToolbar className="zoom-bar">
-        <div>
-          <b className="mr-1">Zooming:</b>{' '}
-          {this.renderButtonGroup({ options: ['Hours', 'Days', 'Months'], active: zoom, handler: this.handleZoomChange })}
-        </div>
-        <div>
-          <b className="mr-1">Filtering:</b>{' '}
-          {this.renderButtonGroup({ options: ['Hight', 'Normal', 'Low'], active: priority, handler: this.handlePriorityChange })}
-        </div>
-        <div>
-          <Input
-            type="text"
-            name="search"
-            placeholder="Search"
-            onChange={this.handleSerchStringChange}
-          />
-        </div>
+        <Button onClick={this.toggleCurrentDHTMLX}>
+          {isCurrentDHTMLXGantt && 'Scheduler'}
+          {isCurrentDHTMLXScheduler && 'Gantt'}
+        </Button>
+        {isCurrentDHTMLXGantt && (
+          <>
+            <div>
+              <b className="mr-1">Zooming:</b>{' '}
+              {this.renderButtonGroup({ options: ['Hours', 'Days', 'Months'], active: zoom, handler: this.handleZoomChange })}
+            </div>
+            <div>
+              <b className="mr-1">Filtering:</b>{' '}
+              {this.renderButtonGroup({ options: ['Hight', 'Normal', 'Low'], active: priority, handler: this.handlePriorityChange })}
+            </div>
+            <div>
+              <Input
+                type="text"
+                name="search"
+                placeholder="Search"
+                onChange={this.handleSerchStringChange}
+              />
+            </div>
+          </>
+        )}
       </ButtonToolbar>
     );
   }
@@ -64,6 +73,12 @@ class Toolbar extends React.Component {
   handleSerchStringChange = (event) => {
     if (this.props.onSetSearchString) {
       this.props.onSetSearchString(event.target.value)
+    }
+  }
+
+  toggleCurrentDHTMLX = () => {
+    if (this.props.toggleDHTMLXHandler) {
+      this.props.toggleDHTMLXHandler();
     }
   }
 }
